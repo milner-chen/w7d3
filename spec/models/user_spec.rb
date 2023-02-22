@@ -30,9 +30,8 @@ RSpec.describe User, type: :model do
   end
 
   describe "::find_by_credentials" do
-    before :each do
-      user = build(:user)
-    end
+
+    subject(:user) { create(:user) }
 
     it "should return specified user instance with correct creds" do
       expect(User.find_by_credentials(user.username, user.password)).to eq(user)
@@ -44,16 +43,23 @@ RSpec.describe User, type: :model do
   end
   
   describe "#is_password?" do
-    before :each do
-      build(:user)
-    end
 
     it "should return false if password is incorrect" do
+      user = create(:user)
       expect(user.is_password?("password")).to eq(false)
     end
 
     it "should return true if password is correct" do
+      user = create(:user)
       expect(user.is_password?("MyString")).to eq(true)
     end
   end
+
+  describe "#generate_unique_session_token" do
+    subject(:user) { create(:user) }
+    it "should generate unqiue session token" do
+      expect(user.generate_unique_session_token).to_not eq(user.session_token)
+    end
+  end
+
 end
