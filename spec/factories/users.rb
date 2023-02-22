@@ -13,5 +13,6 @@ FactoryBot.define do
   factory :user do
     username { "MyString" }
     password { "MyString" }
+    session_token { "whatever u want" }
   end
 end
