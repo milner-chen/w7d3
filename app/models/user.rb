@@ -27,4 +27,8 @@ class User < ApplicationRecord
         return @user if @user.is_password?(password)
     end
 
+    def is_password?(password)
+        bcrypt_obj = BCrypt::Password.new(self.password_digest)
+        bcrypt_obj.is_password?(password)
+    end
 end 

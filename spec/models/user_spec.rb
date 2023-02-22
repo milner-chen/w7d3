@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
 
   describe "uniqueness" do
     before :each do
-      create(:user)
+      user = create(:user)
     end
   
     it { should validate_uniqueness_of(:username) }
@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
 
   describe "::find_by_credentials" do
     before :each do
-      build(:user)
+      user = build(:user)
     end
 
     it "should return specified user instance with correct creds" do
@@ -43,4 +43,17 @@ RSpec.describe User, type: :model do
     end
   end
   
+  describe "#is_password?" do
+    before :each do
+      build(:user)
+    end
+
+    it "should return false if password is incorrect" do
+      expect(user.is_password?("password")).to eq(false)
+    end
+
+    it "should return true if password is correct" do
+      expect(user.is_password?("MyString")).to eq(true)
+    end
+  end
 end
