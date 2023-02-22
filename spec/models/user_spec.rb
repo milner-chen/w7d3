@@ -29,5 +29,18 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of(:session_token) }
   end
 
+  describe "::find_by_credentials" do
+    before :each do
+      build(:user)
+    end
+
+    it "should return specified user instance with correct creds" do
+      expect(User.find_by_credentials(user.username, user.password)).to eq(user)
+    end
+
+    it "should return nil no user with these creds" do
+      expect(User.find_by_credentials("hello", "goodbye")).to be(nil)
+    end
+  end
   
 end
