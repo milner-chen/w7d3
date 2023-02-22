@@ -39,4 +39,7 @@ class User < ApplicationRecord
         end
         token
     end
+
+    def ensure_session_token
+    end
 end 

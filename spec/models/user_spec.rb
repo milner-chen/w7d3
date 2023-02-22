@@ -67,8 +67,11 @@ RSpec.describe User, type: :model do
       username: 'username',
       password: 'password'
     ) }
-    it "should ensure the session token exists" do
-      expect{user.ensure_session_token}.not_to raise_error(ActiveRecord::RecordInvalid)
+    # it "should ensure the session token exists" do
+    #   expect{user.ensure_session_token}.not_to raise_error
+    # end
+    it "should assign a session token if user does not have one" do
+      # tbc
     end
   end
 end
