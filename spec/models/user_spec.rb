@@ -62,4 +62,13 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#ensure_session_token" do
+    subject(:user) { User.new(
+      username: 'username',
+      password: 'password'
+    ) }
+    it "should ensure the session token exists" do
+      expect{user.ensure_session_token}.not_to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
 end
